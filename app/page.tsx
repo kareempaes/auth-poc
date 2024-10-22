@@ -1,101 +1,56 @@
-import Image from "next/image";
+'use client';
+import Image from 'next/image';
+import Card from '@mui/material/Card';
+import { Button, CardContent, CardHeader, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
+// import sgMail from '@sendgrid/mail';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [email, setEmail] = useState({id: "email", value: ""});
+  const [password, setPassword] = useState({id: "password", value: ""});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const submit = async () => {
+    const {status} = await EmailPassword.signIn({
+      formFields: [email, password],
+    });
+
+    if (status === "OK") {
+      console.log("Success");
+    } else {
+      console.log("Error");
+    }
+  };
+
+  return (
+    <div className="grid grid-cols-2 items-center justify-items-center min-h-screen min-w-screen">
+      <div className="w-full h-full bg-[url('/images/background.png')] bg-cover pl-8 pt-4">
+        <Image src="/images/ambyint_icon.png" width={120} height={120} alt="Logo" />
+      </div>
+      <div className="w-full h-full flex flex-col justify-center items-center">
+        <Card className="w-[400px] h-[620px]">
+          <CardContent className='flex flex-col items-center space-y-5 px-12'>
+            <Image src="/images/ambyint_icon.png" width={200} height={200} alt="Logo" />
+            <CardHeader title="Welcome" />
+            <Typography variant="body1">Login to the Ambyint Platform.</Typography>
+            <TextField id="outlined-email-input" className='w-full' label="Email" type="email" 
+              onInput={e => setEmail({id: "email", value: (e.target as HTMLInputElement).value})}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <TextField id="outlined-password-input" className='w-full' label="Password" type="password" autoComplete="current-password"
+              onInput={e => setPassword({id: "password", value: (e.target as HTMLInputElement).value})}
+            />
+            <Typography className="self-start" variant="body2">Forgot your password?</Typography>
+            <Button className='w-full h-[60px] bg-[#36454F]' variant="contained" onClick={() => submit()}>Continue</Button>
+            <div className='flex w-full justify-center items-center h-[20px]'>
+              <hr className="w-full h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700"/>
+              <Typography className='px-4' variant="body2">OR</Typography>
+              <hr className="w-full h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700"/>
+            </div>
+              <Button className='w-full h-[60px] bg-[#36454F]' variant="contained">Continue with Microsoft</Button>
+          </CardContent>
+        </Card>
+        <Typography className="mt-4" variant="body2">Trouble Signing In? <span className="text-[#FF6600] underline">Contact Us</span></Typography>
+      </div>
     </div>
   );
 }
