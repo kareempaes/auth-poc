@@ -4,11 +4,20 @@ import Card from '@mui/material/Card';
 import { Button, CardContent, CardHeader, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
-// import sgMail from '@sendgrid/mail';
+import axios from 'axios';
 
 export default function Home() {
   const [email, setEmail] = useState({id: "email", value: ""});
   const [password, setPassword] = useState({id: "password", value: ""});
+
+  const sendEmail = async () => {
+    const res = await axios.post('/api/email-invite', {
+      name: 'Test',
+      email: 'kareemjpaes@gmail.com',
+    })
+
+    console.log(res);
+  }
 
   const submit = async () => {
     const {status} = await EmailPassword.signIn({
@@ -46,7 +55,9 @@ export default function Home() {
               <Typography className='px-4' variant="body2">OR</Typography>
               <hr className="w-full h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700"/>
             </div>
-              <Button className='w-full h-[60px] bg-[#36454F]' variant="contained">Continue with Microsoft</Button>
+              <Button className='w-full h-[60px] bg-[#36454F]' variant="contained" onClick={
+                () => sendEmail()
+              }>Continue with Microsoft</Button>
           </CardContent>
         </Card>
         <Typography className="mt-4" variant="body2">Trouble Signing In? <span className="text-[#FF6600] underline">Contact Us</span></Typography>

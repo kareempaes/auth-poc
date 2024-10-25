@@ -4,12 +4,18 @@ import SessionNode from 'supertokens-node/recipe/session'
 import Dashboard from "supertokens-node/recipe/dashboard";
 import EmailPassword from 'supertokens-node/recipe/emailpassword'
 import EmailVerification from "supertokens-node/recipe/emailverification";
+import UserRoles from "supertokens-node/recipe/userroles"
+
 
 
 import { appInfo } from './appInfo'
 import { TypeInput } from "supertokens-node/types";
 
 export const backendConfig = (): TypeInput => {
+  
+  UserRoles.createNewRoleOrAddPermissions("admin", ["create", "read", "update", "delete"]);
+  UserRoles.createNewRoleOrAddPermissions("user", ["read"]);
+
   return {
     framework: "custom",
     supertokens: {
@@ -59,6 +65,7 @@ export const backendConfig = (): TypeInput => {
         mode: "REQUIRED", // or "OPTIONAL"
       }),
       SessionNode.init(),
+      UserRoles.init(),
       EmailPassword.init(),
       Dashboard.init(),
     ],
