@@ -12,9 +12,6 @@ import { appInfo } from './appInfo'
 import { TypeInput } from "supertokens-node/types";
 
 export const backendConfig = (): TypeInput => {
-  
-  UserRoles.createNewRoleOrAddPermissions("admin", ["create", "read", "update", "delete"]);
-  UserRoles.createNewRoleOrAddPermissions("user", ["read"]);
 
   return {
     framework: "custom",
