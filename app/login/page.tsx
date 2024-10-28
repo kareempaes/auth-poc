@@ -46,7 +46,7 @@ export default function Login() {
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center">
           <Card className='w-[395px] h-fit space-5 px-12 pb-5'>
-            <CardContent className='flex flex-col items-center '>
+            <CardContent className='flex flex-col items-center p-0 pb-5'>
               <CardHeader title="Welcome"></CardHeader>
               <Typography id='login-title' className='pb-5'>{loginTitle}</Typography>
               <TextField id="outlined-email-input" type="email" label="Email" className='w-full email-view'></TextField>

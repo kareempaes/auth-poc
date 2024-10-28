@@ -1,13 +1,19 @@
 'use client'
-import { Card, CardContent, CardHeader, TextField, Typography, Button, Container } from '@mui/material';
+import { Card, CardContent, CardHeader, TextField, Typography, Button, SvgIcon } from '@mui/material';
 import Image from 'next/image';
 import { makeStyles } from '@mui/styles';
+import Done from '../../public/images/Done.svg'
 
 
 const useStyles = makeStyles(() => ({
     borderOne: {
         border: "1px solid gray",
-        marginBottom: '20px'
+        marginBottom: '20px',
+        borderRadius: '5px'
+    },
+
+    lowerCase: {
+        textTransform: 'lowercase'
     }
   }))
 
@@ -37,8 +43,9 @@ export default function PasswordUpdate () {
                     <Typography variant='body2' color='#737A8E'>No more than 2 identical characters in a row (e.g. 'aaa' not allowed)</Typography>
                 </CardContent>
                 </div>
-                <Button variant='contained' disabled className='bg-[#36454F] w-full h-[62px] mb-4'>Reset Password</Button>
+                <Button variant='contained' disabled className='bg-[#36454F] w-full h-[62px] mb-4 normal-case'>Reset Password</Button>
                 <Typography variant='body2' align='center' fontWeight={500}>Back to Login</Typography>
+                <SvgIcon></SvgIcon>
             </Card>
         </div>
         </div>
