@@ -3,32 +3,19 @@ import Image from 'next/image';
 import Card from '@mui/material/Card';
 import { Button, CardContent, CardHeader, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-// import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState({id: "email", value: ""});
-    console.log(email);
-//   const sendEmail = async () => {
-//     const res = await axios.post('/api/email-invite', {
-//       name: 'Test',
-//       email: 'kareemjpaes@gmail.com',
-//     })
 
-//     console.log(res);
-//   }
 
-//   const submit = async () => {
-//     const {status} = await EmailPassword.signIn({
-//       formFields: [email, password],
-//     });
+  const submit = async () => {
+    const res = await axios.post('/api/reset-password', {
+        email: email.value,
+    });
 
-//     if (status === "OK") {
-//       console.log("Success");
-//     } else {
-//       console.log("Error");
-//     }
-//   };
+    console.log(res);
+  };
 
   return (
     <div className="grid grid-cols-2 items-center justify-items-center min-h-screen min-w-screen">

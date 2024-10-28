@@ -6,7 +6,7 @@ import { useState } from 'react';
 import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
 import axios from 'axios';
 
-export default function Home() {
+export default function Route() {
   const [email, setEmail] = useState({id: "email", value: ""});
   const [password, setPassword] = useState({id: "password", value: ""});
 
@@ -17,6 +17,11 @@ export default function Home() {
     })
 
     console.log(res);
+  }
+
+  const forgotPasswordRoute = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.preventDefault();
+    window.location.href = '/forgot-password';
   }
 
   const submit = async () => {
@@ -48,7 +53,7 @@ export default function Home() {
             <TextField id="outlined-password-input" className='w-full' label="Password" type="password" autoComplete="current-password"
               onInput={e => setPassword({id: "password", value: (e.target as HTMLInputElement).value})}
             />
-            <Typography className="self-start" variant="body2">Forgot your password?</Typography>
+            <Typography className="self-start cursor-pointer" variant="body2" onClick={e => forgotPasswordRoute(e)}>Forgot your password?</Typography>
             <Button className='w-full h-[60px] bg-[#36454F]' variant="contained" onClick={() => submit()}>Continue</Button>
             <div className='flex w-full justify-center items-center h-[20px]'>
               <hr className="w-full h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700"/>
@@ -60,7 +65,7 @@ export default function Home() {
               }>Continue with Microsoft</Button>
           </CardContent>
         </Card>
-        <Typography className="mt-4" variant="body2">Trouble Signing In? <span className="text-[#FF6600] underline">Contact Us</span></Typography>
+        <Typography className="mt-4" variant="body2">Trouble Signing In? <span className="text-[#FF6600] cursor-pointer underline">Contact Us</span></Typography>
       </div>
     </div>
   );
