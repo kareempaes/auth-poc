@@ -1,8 +1,7 @@
 'use client'
-import { Card, CardContent, CardHeader, TextField, Typography, Button, SvgIcon } from '@mui/material';
+import { Card, CardContent, TextField, Typography, Button, SvgIcon } from '@mui/material';
 import Image from 'next/image';
 import { makeStyles } from '@mui/styles';
-import Done from '../../public/images/Done.svg'
 
 
 const useStyles = makeStyles(() => ({
@@ -40,7 +39,7 @@ export default function PasswordUpdate () {
                     <Typography variant='body2' color='#737A8E'>Lower case letters (a-z)</Typography>
                     <Typography variant='body2' color='#737A8E'>Numbers(i.e 0-9)</Typography>
                     <Typography variant='body2' color='#737A8E'>Special characters(e.g )</Typography>
-                    <Typography variant='body2' color='#737A8E'>No more than 2 identical characters in a row (e.g. 'aaa' not allowed)</Typography>
+                    <Typography variant='body2' color='#737A8E'>No more than 2 identical characters in a row (e.g. &apos;aaa&apos; not allowed)</Typography>
                 </CardContent>
                 </div>
                 <Button variant='contained' disabled className='bg-[#36454F] w-full h-[62px] mb-4 normal-case'>Reset Password</Button>
